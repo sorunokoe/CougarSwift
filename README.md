@@ -89,4 +89,4 @@ MXMetricsManager.configure(with: MyBackend())
 
 ## License
 
-MIT © TrackMan
+MIT
