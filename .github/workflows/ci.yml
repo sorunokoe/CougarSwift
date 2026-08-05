@@ -32,8 +32,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-spm-
 
-      - name: Build
-        run: swift build --build-tests
+      # CougarSwift only declares iOS as a supported platform (no macOS), so
+      # building/testing must target an iOS Simulator destination rather than
+      # the native macOS host — otherwise SwiftPM falls back to an old macOS
+      # deployment target that conflicts with dependencies like Supabase.
+      - name: Build for Testing
+        run: |
+          xcodebuild build-for-testing \
+            -scheme CougarSwift \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -clonedSourcePackagesDirNamed .build
 
-      - name: Test
-        run: swift test --parallel
+      - name: Test without Building
+        run: |
+          xcodebuild test-without-building \
+            -scheme CougarSwift \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -clonedSourcePackagesDirNamed .build
