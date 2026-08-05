@@ -28,6 +28,7 @@ public struct AppDiagnostics: Codable, Sendable {
         diskWriteExceptionDiagnostics = payload.diskWriteExceptionDiagnostics?.map { DiskWriteExceptionDiagnostic(from: $0) } ?? []
         cpuExceptionDiagnostics = payload.cpuExceptionDiagnostics?.map { CPUExceptionDiagnostic(from: $0) } ?? []
     }
+}
 
 // MARK: - Crash Diagnostic
 

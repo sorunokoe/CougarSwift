@@ -43,14 +43,16 @@ public final class SupabaseMetricsService: MetricsStorageService, @unchecked Sen
     // MARK: - MetricsStorageService
 
     public func store(metrics: consuming AppMetrics) async throws {
+        let metricsID = metrics.id
         let record = MetricsRecord(from: metrics)
         try await client.from(Tables.metrics).insert(record).execute()
-        logger.debug("Stored metrics: \(metrics.id)")
+        logger.debug("Stored metrics: \(metricsID)")
     }
 
     public func store(diagnostics: consuming AppDiagnostics) async throws {
+        let diagnosticsID = diagnostics.id
         let record = DiagnosticsRecord(from: diagnostics)
         try await client.from(Tables.diagnostics).insert(record).execute()
-        logger.debug("Stored diagnostics: \(diagnostics.id)")
+        logger.debug("Stored diagnostics: \(diagnosticsID)")
     }
 }
