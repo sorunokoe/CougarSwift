@@ -41,11 +41,11 @@ jobs:
           xcodebuild build-for-testing \
             -scheme CougarSwift \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -clonedSourcePackagesDirNamed .build
+            -derivedDataPath .build
 
       - name: Test without Building
         run: |
           xcodebuild test-without-building \
             -scheme CougarSwift \
             -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -clonedSourcePackagesDirNamed .build
+            -derivedDataPath .build
