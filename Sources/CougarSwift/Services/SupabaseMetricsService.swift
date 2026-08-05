@@ -53,6 +53,6 @@ public final class SupabaseMetricsService: MetricsStorageService, @unchecked Sen
         let diagnosticsID = diagnostics.id
         let record = DiagnosticsRecord(from: diagnostics)
         try await client.from(Tables.diagnostics).insert(record).execute()
-        logger.debug("Stored diagnostics: \(diagnostics.id)")
+        logger.debug("Stored diagnostics: \(diagnosticsID)")
     }
 }
